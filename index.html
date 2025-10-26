@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    <style>
+        /* Basic Reset and Setup */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Nice Gradient Background */
+            background: linear-gradient(135deg, #f0f4f8 0%, #c8d9e6 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center;   /* Center vertically */
+        }
+
+        /* Container for the upload area */
+        .upload-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Styling for the two image upload areas */
+        .image-inputs {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            flex-basis: 50%; /* Each takes up half the space */
+            padding: 15px;
+            border: 2px dashed #a8c0d8;
+            border-radius: 8px;
+            background-color: #f7f9fb;
+            transition: border-color 0.3s;
+        }
+
+        .input-group:hover {
+            border-color: #5a85b9;
+        }
+
+        /* Style the actual file input button to make it look nicer */
+        input[type="file"] {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Styling for the image preview area */
+        .preview {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px;
+            margin-top: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            object-fit: contain; /* Ensures the image fits without cropping */
+        }
+
+        /* Button styling */
+        button {
+            background-color: #4a90e2;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3a7bc8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="upload-container">
+    <h1> Upload Your Two Images</h1>
+
+    <div class="image-inputs">
+        <div class="input-group">
+            <label for="imageUpload1">Image 1</label>
+            <input type="file" id="imageUpload1" accept="image/*" onchange="previewImage(event, 'preview1')">
+            <img id="preview1" class="preview" src="#" alt="Image Preview 1" style="display:none;">
+        </div>
+
+        <div class="input-group">
+            <label for="imageUpload2">Image 2</label>
+            <input type="file" id="imageUpload2" accept="image/*" onchange="previewImage(event, 'preview2')">
+            <img id="preview2" class="preview" src="#" alt="Image Preview 2" style="display:none;">
+        </div>
+    </div>
+
+    <button onclick="alert('Images are ready for submission!')">Submit Images</button>
+</div>
+
+<script>
+    /**
+     * Handles the image file selection and displays a preview.
+     * @param {Event} event - The file input change event.
+     * @param {string} previewId - The ID of the <img> element to show the preview in.
+     */
+    function previewImage(event, previewId) {
+        const reader = new FileReader();
+        const imageElement = document.getElementById(previewId);
+
+        reader.onload = function(){
+            if(reader.readyState == 2){
+                imageElement.src = reader.result;
+                imageElement.style.display = 'block'; // Show the image element
+            }
+        }
+
+        if(event.target.files[0]){
+            reader.readAsDataURL(event.target.files[0]);
+        } else {
+            imageElement.src = '#';
+            imageElement.style.display = 'none'; // Hide if no file is selected
+        }
+    }
+</script>
+
+</body>
+</html>
