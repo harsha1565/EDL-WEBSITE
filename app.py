@@ -46,4 +46,5 @@ def compare():
 
 if __name__ == '__main__':
     # run on 0.0.0.0:5000 by default
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(debug=False)
+
