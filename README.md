@@ -31,7 +31,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-4. Open imgcompare.netlify.app in your browser.
+4. Open https://imgcompare.netlify.app/ in your browser.
 
 ## API
 
